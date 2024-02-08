@@ -32,6 +32,9 @@ def composite_identity(f, g):
     False
     """
     "*** YOUR CODE HERE ***"
+    def h(x):
+        return f(g(x)) == g(f(x))
+    return h
 
 
 def count_cond(condition):
@@ -62,7 +65,16 @@ def count_cond(condition):
     8
     """
     "*** YOUR CODE HERE ***"
+    def h(N):
+        count = 0
+        for i in range(1, N + 1):
+            if condition(N, i):
+                count += 1
+        return count
+    
+    return h
 
+import math
 
 def multiple(a, b):
     """Return the smallest number n that is a multiple of both a and b.
@@ -73,6 +85,7 @@ def multiple(a, b):
     42
     """
     "*** YOUR CODE HERE ***"
+    return a * b // math.gcd(a, b)
 
 
 def cycle(f1, f2, f3):
@@ -102,3 +115,15 @@ def cycle(f1, f2, f3):
     19
     """
     "*** YOUR CODE HERE ***"
+    def h(n):
+        def g(x):
+            for i in range(n):
+                if i % 3 == 0:
+                    x = f1(x)
+                elif i % 3 == 1:
+                    x = f2(x)
+                else:
+                    x = f3(x)
+            return x
+        return g
+    return h
